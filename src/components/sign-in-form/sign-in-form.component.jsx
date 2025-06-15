@@ -18,16 +18,16 @@ const SignInForm = () => {
     }
 
     const SignInWithGoogle = async () => {
-        const {user} = await signInWithGooglePopup();
-        await createUserDocumentFromAuth(user);
+        await signInWithGooglePopup();
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try{
-            const response = await signInAuthUserWithEmailAndPassword(email, password);
-            console.log(response);
+            const {user} = await signInAuthUserWithEmailAndPassword(email, password);
+            resetFormFields();
+            
         }catch(e){
             if(e.code === "auth/invalid-credential"){
                 alert("Incorrect Passord!!!");
